@@ -96,7 +96,7 @@ function set_season() {
 
     // Set default season if none is selected
     if (global_season == null) {
-        global_season = 1;
+        global_season = Math.floor(Math.random() * Object.keys(seasons).length) + 1;
         season_list.value = global_season;
     }
 }
@@ -117,7 +117,7 @@ function set_episode() {
 
     // Set default episode if none is selected
     if (global_episode == null) {
-        global_episode = 1;
+        global_episode = Math.floor(Math.random() * Object.keys(seasons[global_season].episodes).length) + 1;
         episode_list.value = global_episode;
     }
 }
@@ -173,6 +173,12 @@ function next_frame() {
 function random_frame() {
     const max_frames = seasons[global_season].episodes[global_episode].frames;
     const random_frame = Math.floor(Math.random() * max_frames) + 1;
+    global_season = Math.floor(Math.random() * Object.keys(seasons).length) + 1;
+    global_episode = Math.floor(Math.random() * Object.keys(seasons[global_season].episodes).length) + 1;
+
+    season_list.value = global_season;
+    episode_list.value = global_episode;
+
     load_frame(random_frame);
 }
 
