@@ -40,6 +40,8 @@ const frame_input = document.getElementById("frame-input");
 // error message
 const errMsgView = document.getElementById('err-msg-view');
 
+// spinner
+const spinner = document.querySelector('.spinner');
 
 // global variables
 global_season = null;
@@ -129,14 +131,23 @@ function load_frame(frame_number) {
     }
 
     const image_url = `${base_url}/${seasons[global_season].user_name}/${seasons[global_season].repo}/${seasons[global_season].branch}/${global_episode.toString().padStart(2, '0')}/${frame_number.toString().padStart(4, '0')}.jpg`;
-    
     const proxied_url = `https://images.weserv.nl/?url=${encodeURIComponent(image_url.replace(/^https?:\/\//, ''))}`;
 
+    // Mostra o spinner antes de carregar a imagem
+    spinner.style.display = 'block';
+    
     current_image.src = proxied_url;
     global_frame = frame_number;
     frame_input.value = frame_number;
 
+    current_image.onload = () => {
+        // Esconde o spinner quando a imagem carregar
+        spinner.style.display = 'none';
+    };
+
     current_image.onerror = () => {
+        // Esconde o spinner em caso de erro
+        spinner.style.display = 'none';
         errMsgView.style.display = 'flex';
         errMsgView.textContent = 'Error loading image. Choose another frame.';
     };
