@@ -60,7 +60,7 @@ season_list.addEventListener('change', function() {
 episode_list.addEventListener('change', function() {
     if (this.value > 0 && this.value <= Object.keys(seasons[global_season].episodes).length) {
         global_episode = this.value;
-
+        load_frame(global_frame);
     }
 });
 
