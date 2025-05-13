@@ -169,14 +169,31 @@ function random_frame() {
 
 async function download_frame() {
     try {
+        // Check if the image is loaded
+        if (!current_image.complete || !current_image.naturalWidth) {
+            errMsgView.style.display = 'flex';
+            errMsgView.textContent = 'Wait for the image to load completely.';
+            return;
+        }
+
+        // Check if the image URL is valid
+        if (!current_image.src || current_image.src === window.location.href) {
+            throw new Error('Invalid image URL');
+        }
+
         // Fetch the image
         const response = await fetch(current_image.src);
         if (!response.ok) {
-            
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         // Get the image data as blob
         const blob = await response.blob();
+        
+        // Check if the blob has content
+        if (blob.size === 0) {
+            throw new Error('Empty or corrupted image');
+        }
         
         // Create object URL
         const url = window.URL.createObjectURL(blob);
@@ -194,8 +211,9 @@ async function download_frame() {
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
     } catch (error) {
-        console.error(`Error downloading frame: ${error.message}`);
-        alert('Error downloading frame. Please try again.');
+        console.error(`[download_frame] Error downloading frame: ${error.message}`);
+        errMsgView.style.display = 'flex';
+        errMsgView.textContent = 'Error downloading frame. Please try again.';
     }
 }
 
