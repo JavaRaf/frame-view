@@ -121,7 +121,6 @@ function set_episode() {
 }
 
 function load_frame(frame_number) {
-    // Validate frame number
     errMsgView.style.display = 'none';
     const max_frames = seasons[global_season].episodes[global_episode].frames;
     if (frame_number < 1 || frame_number > max_frames) {
@@ -129,23 +128,22 @@ function load_frame(frame_number) {
         return;
     }
 
-    // Construct image URL
     const image_url = `${base_url}/${seasons[global_season].user_name}/${seasons[global_season].repo}/${seasons[global_season].branch}/${global_episode.toString().padStart(2, '0')}/${frame_number.toString().padStart(4, '0')}.jpg`;
     
-    // Update image source
-    current_image.src = image_url;
+    const proxied_url = `https://images.weserv.nl/?url=${encodeURIComponent(image_url.replace(/^https?:\/\//, ''))}`;
+
+    current_image.src = proxied_url;
     global_frame = frame_number;
     frame_input.value = frame_number;
 
-    // Handle image loading error
     current_image.onerror = () => {
         errMsgView.style.display = 'flex';
         errMsgView.textContent = 'Error loading image. Choose another frame.';
     };
-    
-    // Update URL
+
     updateURL();
 }
+
 
 // Navigation functions
 function prev_frame() {
