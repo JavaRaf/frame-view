@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frieren Frame Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-viewer">
+            <img id="current-image" src="" alt="Frame">
+            <div id="err-msg-view"></div>
+        </div>
+        <div class="controls">
+            <button class="btn" id="prev-btn">Prev</button>
+            <button class="btn" id="random-btn">Random</button>
+            <div class="episode-frame-container">
+                <select id="season-list">
+                    <option value="" disabled selected>Season</option>
+                </select>
+                <select id="episode-list">
+                    <option value="" disabled selected>Episode</option>
+                </select>
+                <input type="number" id="frame-input" placeholder="Frame" min="1">
+            </div>
+            <button class="btn" id="download-btn">Download</button>
+            <button class="btn" id="next-btn">Next</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
