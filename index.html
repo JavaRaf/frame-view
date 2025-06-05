@@ -7,26 +7,38 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="image-viewer">
-            <img id="current-image" src="" alt="Frame">
-            <div id="err-msg-view"></div>
-            <div class="spinner"></div>
+    <div class="page-wrapper">
+        <div class="instructions-box">
+            <h2>Instructions</h2>
+            <ul>
+                <li>Select the desired season</li>
+                <li>Navigate episodes using 'W' or Up Arrow (next) and 'S' or Down Arrow (previous)</li>
+                <li>Navigate frames using 'A' or Left Arrow (previous) and 'D' or Right Arrow (next)</li>
+                <li>Click "Random" for a random frame</li>
+                <li>Click "Download" to save the current frame</li>
+            </ul>
         </div>
-        <div class="controls">
-            <button class="btn" id="prev-btn">Prev</button>
-            <button class="btn" id="random-btn">Random</button>
-            <div class="episode-frame-container">
-                <select id="season-list">
-                    <option value="" disabled selected>Season</option>
-                </select>
-                <select id="episode-list">
-                    <option value="" disabled selected>Episode</option>
-                </select>
-                <input type="number" id="frame-input" placeholder="Frame" min="1">
+        <div class="container">
+            <div class="image-viewer">
+                <img id="current-image" src="" alt="Frame">
+                <div id="err-msg-view"></div>
+                <div class="spinner"></div>
             </div>
-            <button class="btn" id="download-btn">Download</button>
-            <button class="btn" id="next-btn">Next</button>
+            <div class="controls">
+                <button class="btn" id="prev-btn">Prev</button>
+                <button class="btn" id="random-btn">Random</button>
+                <div class="episode-frame-container">
+                    <select id="season-list">
+                        <option value="" disabled selected>Season</option>
+                    </select>
+                    <select id="episode-list">
+                        <option value="" disabled selected>Episode</option>
+                    </select>
+                    <input type="number" id="frame-input" placeholder="Frame" min="1">
+                </div>
+                <button class="btn" id="download-btn">Download</button>
+                <button class="btn" id="next-btn">Next</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

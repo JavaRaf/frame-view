@@ -122,6 +122,48 @@ function set_episode() {
     }
 }
 
+
+// keyboard navigation for frame
+addEventListener('keydown', function(event) {
+    // Prevent default behavior for arrow keys to avoid page scrolling
+    const key = event.key.toLowerCase();
+    if (['arrowleft', 'arrowup', 'arrowright', 'arrowdown', 'a', 'w', 'd', 's'].includes(key)) {
+        event.preventDefault();
+        
+        switch(key) {
+            case 'arrowleft':
+            case 'a':
+                prev_frame();
+                break;
+
+            case 'arrowright': 
+            case 'd':
+                next_frame();
+                break;
+        }
+    }
+});
+
+
+// keyboard navigation for episode
+addEventListener('keydown', function(event) {
+    const key = event.key.toLowerCase();
+    if (key === 'arrowup' || key === 'w') {
+        if (global_episode < Object.keys(seasons[global_season].episodes).length) {
+            global_episode++;
+            episode_list.value = global_episode;
+        }
+    } else if (key === 'arrowdown' || key === 's') {
+        if (global_episode > 1) {
+            global_episode--;
+            episode_list.value = global_episode;
+        }
+    }
+
+    load_frame(global_frame);
+});
+
+
 function load_frame(frame_number) {
     errMsgView.style.display = 'none';
     const max_frames = seasons[global_season].episodes[global_episode].frames;
