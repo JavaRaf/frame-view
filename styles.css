@@ -32,6 +32,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 #err-msg-view {
@@ -39,20 +40,22 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
+    width: 80%;
+    max-width: 400px;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #7f3131;
+    color: #ff6b6b;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
     border-radius: 5px;
-    z-index: 1;
+    z-index: 2;
     display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .spinner {
@@ -62,12 +65,13 @@ body {
     transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
-    border: 5px solid #f3f3f3;
+    border: 5px solid rgba(255, 255, 255, 0.3);
     border-top: 5px solid #3498db;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    z-index: 1;
+    z-index: 2;
     display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes spin {
@@ -101,6 +105,11 @@ body {
     transition: all 0.2s;
     height: 40px;
     min-width: 80px;
+}
+
+#timestamp-btn {
+    pointer-events: none;
+    user-select: none;
 }
 
 .btn:hover {

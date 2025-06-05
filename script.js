@@ -4,6 +4,7 @@ const seasons = {
         user_name: "JavaRaf", 
         repo: "frames", 
         branch: "main",
+        img_fps: 3.5,
         episodes: {
             1: { name: "Episode 1", frames: 5460 }, 2: { name: "Episode 2", frames: 5460 }, 3: { name: "Episode 3", frames: 5145 }, 4: { name: "Episode 4", frames: 5459 },
             5: { name: "Episode 5", frames: 5145 }, 6: { name: "Episode 6", frames: 5145 }, 7: { name: "Episode 7", frames: 5145 }, 8: { name: "Episode 8", frames: 5145 },
@@ -64,13 +65,17 @@ episode_list.addEventListener('change', function() {
     }
 });
 
+// Remove os eventos anteriores
+frame_input.removeEventListener('change', null);
+frame_input.removeEventListener('keypress', null);
+
+// Adiciona apenas o evento input
 frame_input.addEventListener('input', function() {
     const frame_number = parseInt(this.value);
     if (!isNaN(frame_number)) {
         load_frame(frame_number);
     }
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
     set_season();
@@ -123,6 +128,22 @@ function set_episode() {
 }
 
 
+function set_timestamp() {
+    const timestamp = document.getElementById("timestamp-btn");
+    img_fps = seasons[global_season].img_fps;
+    
+    seconds = global_frame / img_fps;
+
+    hours = Math.floor(seconds / 3600);
+    minutes = Math.floor((seconds % 3600) / 60);
+    seconds = seconds % 60;
+    milliseconds = (seconds - Math.floor(seconds)) * 100;
+
+    // "HH:MM:SS.ms"
+    timestamp.textContent = `${hours.toString().padStart(1, '0')}:${minutes.toString().padStart(2, '0')}:${Math.floor(seconds).toString().padStart(2, '0')}.${milliseconds.toFixed(0).padStart(2, '0')}`;
+}
+
+
 // keyboard navigation for frame
 addEventListener('keydown', function(event) {
     // Prevent default behavior for arrow keys to avoid page scrolling
@@ -165,10 +186,17 @@ addEventListener('keydown', function(event) {
 
 
 function load_frame(frame_number) {
+    if (frame_number === null || frame_number === undefined) {
+        console.error(`[load_frame] Frame number cannot be null or undefined`);
+        errMsgView.style.display = 'flex';
+        errMsgView.textContent = 'Invalid frame number. Please enter a valid frame.';
+        return;
+    }
     errMsgView.style.display = 'none';
     const max_frames = seasons[global_season].episodes[global_episode].frames;
     if (frame_number < 1 || frame_number > max_frames) {
         console.error(`Frame number out of range. Must be between 1 and ${max_frames}`);
+        frame_input.value = global_frame; // Restaura o último frame válido
         return;
     }
 
@@ -181,7 +209,10 @@ function load_frame(frame_number) {
     current_image.src = image_url;
 
     global_frame = frame_number;
-    frame_input.value = frame_number;
+    // Só atualiza o input se não estiver em foco
+    if (document.activeElement !== frame_input) {
+        frame_input.value = frame_number;
+    }
 
     current_image.onload = () => {
         // Hide spinner when image loads
@@ -201,6 +232,7 @@ function load_frame(frame_number) {
     };
 
     updateURL();
+    set_timestamp();
 }
 
 
