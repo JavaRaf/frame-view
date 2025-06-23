@@ -270,3 +270,58 @@ select:focus, #frame-input:focus {
         padding: 10px;
     }
 }
+
+@media (max-width: 480px) {
+    .container {
+        padding: 5px;
+        margin: 5px;
+        max-width: 100vw;
+        text-align: center;
+    }
+
+    .page-wrapper {
+        gap: 8px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .controls, .episode-frame-container {
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .btn, select {
+        min-width: 50px;
+        padding: 6px 8px;
+        text-align: center;
+    }
+
+    #frame-input {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    #prev-btn, #next-btn {
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .instructions-box {
+        padding: 10px;
+        width: 100%;
+        font-size: 13px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .instructions-box h2 {
+        font-size: 1em;
+        text-align: center;
+        
+    }
+
+}
