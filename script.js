@@ -9,7 +9,7 @@ const seasons = {
             1: { name: "Episode 1", frames: 5460 }, 2: { name: "Episode 2", frames: 5460 }, 3: { name: "Episode 3", frames: 5145 }, 4: { name: "Episode 4", frames: 5459 },
             5: { name: "Episode 5", frames: 5145 }, 6: { name: "Episode 6", frames: 5145 }, 7: { name: "Episode 7", frames: 5145 }, 8: { name: "Episode 8", frames: 5145 },
             9: { name: "Episode 9", frames: 5145 }, 10: { name: "Episode 10", frames: 5145 }, 11: { name: "Episode 11", frames: 5145 }, 12: { name: "Episode 12", frames: 5145 },
-            13: { name: "Episode 13", frames: 5145 }, 14: { name: "Episode 14", frames: 5145 }, 15: { name: "Episode 15", frames: 5145 }, 16: { name: "Episode 16", frames: 5145 },
+            13: { name: "Episode 13", frames: 5145 }, 14: { name: "Episode 14", frames: 5145 }, 15: { name: "Episode 15", frames: 5145 }, 16: { name: "Episode 16", frames: 5061 },
             17: { name: "Episode 17", frames: 5145 }, 18: { name: "Episode 18", frames: 5145 }, 19: { name: "Episode 19", frames: 5145 }, 20: { name: "Episode 20", frames: 5145 },
             21: { name: "Episode 21", frames: 5145 }, 22: { name: "Episode 22", frames: 5145 }, 23: { name: "Episode 23", frames: 5145 }, 24: { name: "Episode 24", frames: 5145 },
             25: { name: "Episode 25", frames: 5145 }, 26: { name: "Episode 26", frames: 5061 }, 27: { name: "Episode 27", frames: 5145 }, 28: { name: "Episode 28", frames: 5121 }
