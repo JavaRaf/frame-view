@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frieren Frame Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../static/chibi-frieren.jpeg">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="image-viewer">
+            <img id="current-image" src="../frame.jpg" alt="Frame">
+            <div id="err-msg-view"></div>
+            <div class="spinner"></div>  
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="prev-btn">Prev</button>
+            <button class="btn" id="random-btn">Random</button>
+            <div class="episode-frame-container">
+                <select id="season-list">
+                    <option value="" disabled selected>Season</option>
+                </select>
+                <select id="episode-list">
+                    <option value="" disabled selected>Episode</option>
+                </select>
+                <input type="number" id="frame-input" placeholder="Frame" data-min="1">
+                <button class="btn" id="timestamp-btn">0:00:00.00</button>
+            </div>
+            <button class="btn" id="download-btn">Download</button>
+            <button class="btn" id="next-btn">Next</button>
+        </div>
+        
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

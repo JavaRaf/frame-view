@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frieren Frame Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../static/chibi-frieren.jpeg">
+</head>
+
+
+
+<body>
+    <div class="main-container">
+
+
+        <div class="season-episode">
+            <select name="season" id="season-list">
+                <option value="" disabled selected>Season</option>
+            </select>
+            <select name="episode" id="episode-list">
+                <option value="" disabled selected>Episode</option>           
+            </select>
+        </div>
+
+        <div class="frame-timestamp">
+            <div class="frame">
+                <input type="number" name="frame" id="frame-input">
+            </div>
+            <div class="timestamp">
+                <button class="btn" id="timestamp-btn">0:00:00.00</button>
+            </div>
+        </div>
+
+
+
+
+        <div class="viewport">
+            <img id="current-image" src="" alt="Frame">
+            <div id="err-msg-view"></div>
+            <div class="spinner"></div>
+        </div>
+
+        <div class="frame-navigation">
+            <button class="prev-frame" id="prev-btn" aria-label="Previous frame">
+                <img src="../static/avancar.png" alt="previous frame">
+            </button>
+            <button class="random-frame" id="random-btn" aria-label="Random frame">
+                <img src="../static/recarregar.png" alt="random frame">
+            </button>
+            <button class="download-frame" id="download-btn" aria-label="Download frame">
+                <img src="../static/download-direto.png" alt="download frame">
+            </button>
+            <button class="next-frame" id="next-btn" aria-label="Next frame">
+                <img src="../static/avancar.png" alt="next frame">
+            </button>
+        </div>
+
+
+
+
+    </div>
+    <script src="main.js"></script>
+</body>
+
+
+
+</html>
