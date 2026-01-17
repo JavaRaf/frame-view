@@ -14,6 +14,18 @@ const seasons = {
             21: { name: "Episode 21", frames: 5145 }, 22: { name: "Episode 22", frames: 5145 }, 23: { name: "Episode 23", frames: 5145 }, 24: { name: "Episode 24", frames: 5145 },
             25: { name: "Episode 25", frames: 5145 }, 26: { name: "Episode 26", frames: 5061 }, 27: { name: "Episode 27", frames: 5145 }, 28: { name: "Episode 28", frames: 5121 }
         }
+    },
+
+    // Season 2 
+    "2": {
+        name: "Season 2",
+        user_name: "JavaRaf",
+        repo: "season2",
+        branch: "main",
+        img_fps: 3.5,
+        episodes: {
+            1: { name: "Episode 1", frames: 5040 }
+        }
     }
 };
 
