@@ -63,20 +63,20 @@ global_frame = null;
 
 // event listeners for season, episode and frame change -------------------------------------------------------
 season_list.addEventListener('change', function() {
-    // Check if the selected season exists in the seasons object
     if (seasons[this.value]) {
         global_season = this.value;
         global_episode = 1;
         set_episode();
+        // Load frame from input or random if input is empty
+        load_frame_from_input_or_random();
     }
 });
 
 episode_list.addEventListener('change', function() {
-    // Check if the selected episode exists in the current season's episodes
-    const episodeValue = parseInt(this.value);
-    if (episodeValue > 0 && seasons[global_season] && seasons[global_season].episodes[episodeValue]) {
-        global_episode = this.value;
-        load_frame(global_frame);
+    if (seasons[global_season] && seasons[global_season].episodes[this.value]) {
+        global_episode = parseInt(this.value);
+        // Load frame from input or random if input is empty
+        load_frame_from_input_or_random();
     }
 });
 
@@ -158,6 +158,20 @@ function set_timestamp() {
 
     // "HH:MM:SS.ms"
     timestamp.textContent = `${hours.toString().padStart(1, '0')}:${minutes.toString().padStart(2, '0')}:${Math.floor(seconds).toString().padStart(2, '0')}.${milliseconds.toFixed(0).padStart(2, '0')}`;
+}
+
+// Helper function to load frame from input or generate random frame if input is empty
+function load_frame_from_input_or_random() {
+    const inputFrame = parseInt(frame_input.value);
+    if (!isNaN(inputFrame) && inputFrame > 0) {
+        // Use frame from input if valid
+        load_frame(inputFrame);
+    } else {
+        // Generate random frame if input is empty or invalid
+        const max_frames = seasons[global_season].episodes[global_episode].frames;
+        const random_frame = Math.floor(Math.random() * max_frames) + 1;
+        load_frame(random_frame);
+    }
 }
 
 
