@@ -21,7 +21,7 @@ const seasons = {
         name: "Season 2",
         user_name: "JavaRaf",
         repo: "season2",
-        branch: "main",
+        branch: "master",
         img_fps: 3.5,
         episodes: {
             1: { name: "Episode 1", frames: 5040 }

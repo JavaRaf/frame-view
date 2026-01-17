@@ -21,7 +21,7 @@ const seasons = {
         name: "Season 2",
         user_name: "JavaRaf",
         repo: "season2",
-        branch: "main",
+        branch: "master",
         img_fps: 3.5,
         episodes: {
             1: { name: "Episode 1", frames: 5040 }
@@ -63,7 +63,8 @@ global_frame = null;
 
 // event listeners for season, episode and frame change -------------------------------------------------------
 season_list.addEventListener('change', function() {
-    if (this.value > 0 && this.value <= Object.keys(seasons).length) {
+    // Check if the selected season exists in the seasons object
+    if (seasons[this.value]) {
         global_season = this.value;
         global_episode = 1;
         set_episode();
@@ -71,7 +72,9 @@ season_list.addEventListener('change', function() {
 });
 
 episode_list.addEventListener('change', function() {
-    if (this.value > 0 && this.value <= Object.keys(seasons[global_season].episodes).length) {
+    // Check if the selected episode exists in the current season's episodes
+    const episodeValue = parseInt(this.value);
+    if (episodeValue > 0 && seasons[global_season] && seasons[global_season].episodes[episodeValue]) {
         global_episode = this.value;
         load_frame(global_frame);
     }
@@ -113,7 +116,9 @@ function set_season() {
 
     // Set default season if none is selected
     if (global_season == null) {
-        global_season = Math.floor(Math.random() * Object.keys(seasons).length) + 1;
+        // Get all season IDs as strings and pick a random one
+        const seasonIds = Object.keys(seasons);
+        global_season = seasonIds[Math.floor(Math.random() * seasonIds.length)];
         season_list.value = global_season;
     }
 }
