@@ -282,13 +282,12 @@ function next_frame() {
 }
 
 function random_frame() {
+    // Keep current season, only change episode and frame
+    global_episode = Math.floor(Math.random() * Object.keys(seasons[global_season].episodes).length) + 1;
+    episode_list.value = global_episode;
+    
     const max_frames = seasons[global_season].episodes[global_episode].frames;
     const random_frame = Math.floor(Math.random() * max_frames) + 1;
-    global_season = Math.floor(Math.random() * Object.keys(seasons).length) + 1;
-    global_episode = Math.floor(Math.random() * Object.keys(seasons[global_season].episodes).length) + 1;
-
-    season_list.value = global_season;
-    episode_list.value = global_episode;
 
     load_frame(random_frame);
 }
