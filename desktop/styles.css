@@ -186,6 +186,99 @@ body {
 	box-shadow: 0 6px 12px rgba(37, 99, 235, 0.35);
 }
 
+/* Progress bar container */
+.progress-bar-container {
+	background-color: rgba(255, 255, 255, 0.12);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 12px;
+	padding: 14px;
+	width: 90%;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* Progress bar styling */
+#progress-bar {
+	width: 100%;
+	height: 8px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.2);
+	outline: none;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+#progress-bar::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: linear-gradient(180deg, #3b82f6, #2563eb);
+	cursor: pointer;
+	box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+	transition: transform 0.15s ease, box-shadow 0.2s ease;
+	margin-top: -5px; /* Center thumb vertically: (18px thumb - 8px track) / 2 */
+}
+
+#progress-bar::-webkit-slider-thumb:hover {
+	transform: scale(1.2);
+	box-shadow: 0 4px 10px rgba(37, 99, 235, 0.6);
+}
+
+#progress-bar::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: linear-gradient(180deg, #3b82f6, #2563eb);
+	cursor: pointer;
+	border: none;
+	box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+	transition: transform 0.15s ease, box-shadow 0.2s ease;
+	/* Firefox automatically centers, but we ensure it with explicit positioning */
+}
+
+#progress-bar::-moz-range-thumb:hover {
+	transform: scale(1.2);
+	box-shadow: 0 4px 10px rgba(37, 99, 235, 0.6);
+}
+
+#progress-bar::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+}
+
+#progress-bar::-moz-range-track {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	border: none;
+}
+
+/* Progress time display */
+.progress-time-display {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	font-variant-numeric: tabular-nums;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#current-time, #total-time {
+	font-weight: 500;
+}
+
 .episode-frame-container {
 	/* Inline group that can wrap on small screens */
 	display: flex;

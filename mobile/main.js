@@ -50,6 +50,11 @@ const current_image = document.getElementById("current-image");
 // input
 const frame_input = document.getElementById("frame-input");
 
+// progress bar
+const progress_bar = document.getElementById("progress-bar");
+const current_time_display = document.getElementById("current-time");
+const total_time_display = document.getElementById("total-time");
+
 // error message
 const errMsgView = document.getElementById('err-msg-view');
 
@@ -60,6 +65,9 @@ const spinner = document.querySelector('.spinner');
 global_season = null;
 global_episode = null;
 global_frame = null;
+
+// Debounce timer for progress bar to avoid overload when dragging
+let progress_bar_timeout = null;
 
 // event listeners for season, episode and frame change -------------------------------------------------------
 season_list.addEventListener('change', function() {
@@ -90,6 +98,27 @@ frame_input.addEventListener('input', function() {
     if (!isNaN(frame_number)) {
         load_frame(frame_number);
     }
+});
+
+// Event listener for progress bar with debounce to avoid overload when dragging
+progress_bar.addEventListener('input', function() {
+    // Clear previous timeout if user is still dragging
+    if (progress_bar_timeout) {
+        clearTimeout(progress_bar_timeout);
+    }
+    
+    // Wait 50ms before loading frame to avoid overload
+    progress_bar_timeout = setTimeout(() => {
+        const max_frames = seasons[global_season].episodes[global_episode].frames;
+        const progress_percentage = parseFloat(this.value);
+        const target_frame = Math.round(1 + (progress_percentage / 100) * (max_frames - 1));
+        
+        // Clamp frame to valid range
+        const clamped_frame = Math.max(1, Math.min(target_frame, max_frames));
+        load_frame(clamped_frame);
+        
+        progress_bar_timeout = null;
+    }, 50);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -145,19 +174,35 @@ function set_episode() {
 }
 
 
+// Helper function to format time from seconds to "H:MM:SS.ms" format
+function format_time_from_seconds(total_seconds) {
+    const hours = Math.floor(total_seconds / 3600);
+    const minutes = Math.floor((total_seconds % 3600) / 60);
+    const seconds = total_seconds % 60;
+    const milliseconds = (seconds - Math.floor(seconds)) * 100;
+
+    return `${hours.toString().padStart(1, '0')}:${minutes.toString().padStart(2, '0')}:${Math.floor(seconds).toString().padStart(2, '0')}.${milliseconds.toFixed(0).padStart(2, '0')}`;
+}
+
+// Helper function to convert frame number to seconds
+function frame_to_seconds(frame_number) {
+    const img_fps = seasons[global_season].img_fps;
+    return frame_number / img_fps;
+}
+
+// Helper function to convert seconds to frame number
+function seconds_to_frame(seconds) {
+    const img_fps = seasons[global_season].img_fps;
+    return Math.round(seconds * img_fps);
+}
+
 function set_timestamp() {
     const timestamp = document.getElementById("timestamp-btn");
-    img_fps = seasons[global_season].img_fps;
+    const current_seconds = frame_to_seconds(global_frame);
+    timestamp.textContent = format_time_from_seconds(current_seconds);
     
-    seconds = global_frame / img_fps;
-
-    hours = Math.floor(seconds / 3600);
-    minutes = Math.floor((seconds % 3600) / 60);
-    seconds = seconds % 60;
-    milliseconds = (seconds - Math.floor(seconds)) * 100;
-
-    // "HH:MM:SS.ms"
-    timestamp.textContent = `${hours.toString().padStart(1, '0')}:${minutes.toString().padStart(2, '0')}:${Math.floor(seconds).toString().padStart(2, '0')}.${milliseconds.toFixed(0).padStart(2, '0')}`;
+    // Update progress bar and time displays
+    update_progress_bar();
 }
 
 // Helper function to load frame from input or generate random frame if input is empty
@@ -172,6 +217,22 @@ function load_frame_from_input_or_random() {
         const random_frame = Math.floor(Math.random() * max_frames) + 1;
         load_frame(random_frame);
     }
+}
+
+// Update progress bar based on current frame
+function update_progress_bar() {
+    if (!global_season || !global_episode || !global_frame) return;
+    
+    const max_frames = seasons[global_season].episodes[global_episode].frames;
+    const progress_percentage = ((global_frame - 1) / (max_frames - 1)) * 100;
+    progress_bar.value = progress_percentage;
+    
+    // Update time displays
+    const current_seconds = frame_to_seconds(global_frame);
+    const total_seconds = frame_to_seconds(max_frames);
+    
+    current_time_display.textContent = format_time_from_seconds(current_seconds);
+    total_time_display.textContent = format_time_from_seconds(total_seconds);
 }
 
 
