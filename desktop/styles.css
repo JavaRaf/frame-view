@@ -110,80 +110,99 @@ body {
 }
 
 .controls {
-	/* Acrylic controls panel */
-	background-color: rgba(255, 255, 255, 0.12);
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.25);
-	display: flex;
-	gap: 12px;
-	padding: 14px;
+	/* Modern grid-based controls panel */
+	display: grid;
+	grid-template-columns: repeat(8, auto);
+	gap: 10px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 12px;
-	flex-wrap: wrap;
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(10px);
+	padding: 12px 16px;
+	border-radius: 16px;
+	max-width: 100%;
 	width: 90%;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
 }
 
-.btn {
-	/* Base button: glass pill with high-contrast content */
-	padding: 10px 16px;
-	font-size: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.6);
+.controls button,
+.controls select,
+.controls input {
+	height: 38px;
 	border-radius: 10px;
-	background-color: rgba(255, 255, 255, 0.9);
+	border: none;
+	font-size: 14px;
+	outline: none;
+	transition: all 0.2s ease;
+	box-sizing: border-box;
+}
+
+/* Ensure readonly inputs have the same appearance */
+.controls input[readonly] {
+	background: white;
+	color: #333;
+}
+
+.controls select,
+.controls input {
+	background: white;
+	color: #333;
+	padding: 0 10px;
+	min-width: 90px;
+	max-width: 130px;
+}
+
+.btn-primary {
+	background: #2563eb;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 0 20px;
+	min-width: 90px;
+}
+
+.btn-primary:hover {
+	background: #1d4ed8;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+	background: #e5e7eb;
 	color: #333;
 	cursor: pointer;
-	transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-	height: 44px;
-	min-width: 96px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	padding: 0 14px;
+	min-width: 75px;
+	max-width: 110px;
 }
 
-#timestamp-btn {
-	/* Display-only timestamp as a neutral pill */
-	pointer-events: none;
-	user-select: none;
-	min-width: 140px;
-	font-variant-numeric: tabular-nums;
-}
-
-.btn:hover {
-	background-color: #fff;
-	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+.btn-secondary:hover {
+	background: #d1d5db;
 	transform: translateY(-1px);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.btn:active {
-	transform: translateY(0);
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+.controls select:hover,
+.controls input:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.btn:focus-visible {
+.controls select:focus,
+.controls input:focus {
 	outline: none;
-	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25), 0 4px 10px rgba(0, 0, 0, 0.2);
+	border: 2px solid #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-#prev-btn, #next-btn {
-	/* Primary actions: solid accent */
-	background: linear-gradient(180deg, #3b82f6, #2563eb);
-	color: #fff;
-	border: none;
-	font-weight: 600;
-	min-width: 110px;
-	box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
-}
-
-#prev-btn:hover, #next-btn:hover {
-	background: linear-gradient(180deg, #60a5fa, #3b82f6);
-	transform: translateY(-1px);
-	box-shadow: 0 10px 18px rgba(37, 99, 235, 0.45);
-}
-
-#prev-btn:active, #next-btn:active {
-	background: linear-gradient(180deg, #3b82f6, #2563eb);
-	transform: translateY(0);
-	box-shadow: 0 6px 12px rgba(37, 99, 235, 0.35);
+#timestamp-input {
+	cursor: default;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+	min-width: 90px;
+	background: white;
+	color: #333;
 }
 
 /* Progress bar container */
@@ -279,41 +298,8 @@ body {
 	font-weight: 500;
 }
 
-.episode-frame-container {
-	/* Inline group that can wrap on small screens */
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	position: relative;
-	flex-wrap: wrap;
-}
-
-select {
-	/* Acrylic select aligned with mobile style */
-	padding: 10px 12px;
-	font-size: 16px;
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	border-radius: 8px;
-	background-color: rgba(255, 255, 255, 0.9);
-	color: #333;
-	cursor: pointer;
-	height: 44px;
-	min-width: 140px;
-	transition: all 0.2s ease;
-}
-
 #frame-input {
-	/* Numeric input for frame index */
-	font-size: 16px;
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	border-radius: 8px;
-	background-color: rgba(255, 255, 255, 0.9);
-	color: #333;
-	height: 44px;
-	width: 120px;
 	text-align: center;
-	padding: 0 12px;
-	transition: all 0.2s ease;
 }
 
 #frame-input::-webkit-inner-spin-button,
@@ -322,16 +308,21 @@ select {
 	margin: 0;
 }
 
-select:hover, #frame-input:hover {
-	background-color: #fff;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-select:focus, #frame-input:focus {
-	outline: none;
-	border-color: #007bff;
-	background-color: #fff;
-	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+/* Breakpoint para telas médias - muda grid antes de ultrapassar limites */
+/* Muda para 4 colunas quando a largura disponível é menor que 1200px */
+@media (max-width: 1200px) {
+	.controls {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px;
+	}
+	
+	.controls button,
+	.controls select,
+	.controls input {
+		width: 100%;
+		max-width: none;
+		min-width: auto;
+	}
 }
 
 @media (max-width: 1024px) {
@@ -348,23 +339,17 @@ select:focus, #frame-input:focus {
 	}
 
 	.controls {
+		grid-template-columns: repeat(4, 1fr);
 		gap: 8px;
 	}
 
-	.btn {
-		padding: 9px 14px;
-		font-size: 14px;
-		min-width: 84px;
-	}
-
-	select, #frame-input, #timestamp-btn {
+	.controls button,
+	.controls select,
+	.controls input {
 		height: 40px;
 		font-size: 14px;
-		min-width: 120px;
-	}
-
-	#prev-btn, #next-btn {
-		min-width: 100px;
+		width: 100%;
+		max-width: none;
 	}
 }
 
@@ -445,29 +430,20 @@ select:focus, #frame-input:focus {
 		text-align: center;
 	}
 
-	.controls, .episode-frame-container {
-		flex-direction: column;
-		gap: 6px;
+	.controls {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
 		width: 100%;
-		align-items: stretch;
-		text-align: center;
 	}
 
-	.btn, select {
-		min-width: 60px;
-		padding: 8px 10px;
-		text-align: center;
-	}
-
-	#frame-input {
+	.controls button,
+	.controls select,
+	.controls input {
 		width: 100%;
-		box-sizing: border-box;
-		text-align: center;
-	}
-
-	#prev-btn, #next-btn {
-		min-width: 80px;
-		text-align: center;
+		height: 40px;
+		font-size: 14px;
+		max-width: none;
+		min-width: auto;
 	}
 
 	.instructions-box {

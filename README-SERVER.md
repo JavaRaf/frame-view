@@ -29,4 +29,13 @@ Pressione `Ctrl+C` no terminal onde o servidor está rodando.
 ## Requisitos
 
 - Python 3.x (recomendado) ou Python 2.7
-- Nenhuma dependência adicional necessária (usa apenas bibliotecas padrão do Python)
+- Nenhuma dependência adicional necessária para funcionamento básico (usa apenas bibliotecas padrão do Python)
+
+## Auto-reload (Opcional)
+
+O servidor suporta recarregamento automático quando arquivos são modificados. Para habilitar esta funcionalidade:
+
+1. Instale o `watchdog`:
+```bash
+pip install watchdog
+```

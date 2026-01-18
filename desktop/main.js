@@ -195,9 +195,9 @@ function seconds_to_frame(seconds) {
 }
 
 function set_timestamp() {
-    const timestamp = document.getElementById("timestamp-btn");
+    const timestamp = document.getElementById("timestamp-input");
     const current_seconds = frame_to_seconds(global_frame);
-    timestamp.textContent = format_time_from_seconds(current_seconds);
+    timestamp.value = format_time_from_seconds(current_seconds);
     
     // Update progress bar and time displays
     update_progress_bar();
