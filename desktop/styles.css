@@ -27,7 +27,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 20px;
+	gap: 0.5rem;
 	padding: 20px;
 	background-color: rgba(255, 255, 255, 0.12);
 	backdrop-filter: blur(10px);
@@ -104,7 +104,6 @@ body {
 
 #current-image {
 	/* Make the image fit while preserving its aspect ratio */
-	width: 95%;
 	height: 100%;
 	object-fit: contain;
 }
@@ -130,7 +129,7 @@ body {
 .controls button,
 .controls select,
 .controls input {
-	height: 38px;
+	height: 42px;
 	border-radius: 10px;
 	border: none;
 	font-size: 14px;
@@ -160,7 +159,7 @@ body {
 	font-weight: 600;
 	cursor: pointer;
 	padding: 0 20px;
-	min-width: 90px;
+	min-width: 100px;
 }
 
 .btn-primary:hover {
@@ -348,7 +347,7 @@ body {
 	.controls button,
 	.controls select,
 	.controls input {
-		height: 40px;
+		height: 45px;
 		font-size: 14px;
 		width: 100%;
 		max-width: none;
