@@ -25,7 +25,7 @@ const seasons = {
         img_fps: 3.5,
         episodes: {
             1: { name: "Episode 1", frames: 5040 }, 2: { name: "Episode 2", frames: 5040 }, 3: { name: "Episode 3", frames: 5040 }, 4: { name: "Episode 4", frames: 5040 },
-            5: { name: "Episode 5", frames: 5040 }
+            5: { name: "Episode 5", frames: 5040 }, 6: { name: "Episode 6", frames: 5040 }
         }
     }
 };
